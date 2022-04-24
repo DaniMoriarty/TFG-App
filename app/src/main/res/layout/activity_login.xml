@@ -67,7 +67,7 @@
                     android:layout_gravity="center_horizontal"
                     android:layout_marginBottom="16dp"
                     android:gravity="center_horizontal"
-                    android:text="Entrar" />
+                    android:text="Login" />
 
                 <Button
                     android:id="@+id/buttonRegister_login"
