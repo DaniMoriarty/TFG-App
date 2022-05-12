@@ -10,6 +10,7 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class RegisterActivity extends AppCompatActivity {
 
@@ -25,11 +26,17 @@ public class RegisterActivity extends AppCompatActivity {
     protected RadioButton radioAdmin;
 
     private Intent pasarPantalla;
+    private DataBase db;
+
+    String user="";
+    String pass="";
+    String rol="";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
+        getSupportActionBar().hide();
 
         label1= (TextView) findViewById(R.id.label1_register);
         label2= (TextView) findViewById(R.id.label2_register);
@@ -42,16 +49,48 @@ public class RegisterActivity extends AppCompatActivity {
         radioUser= (RadioButton) findViewById(R.id.radioUser_register);
         radioAdmin= (RadioButton) findViewById(R.id.radioAdmin_register);
 
+        db=new DataBase();
+
+        if (!db.conex()) {
+
+            Toast.makeText(this, "Fallo en la conexión, reinicie aplicación", Toast.LENGTH_LONG).show();
+        }
 
 
         buttonRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                pasarPantalla=new Intent(RegisterActivity.this, ListActivity.class);
-                finish();
-                startActivity(pasarPantalla);
+                user=textUser.getText().toString();
+                pass=textPass.getText().toString();
+                if (radioUser.isChecked()) {
+                    rol="usuario";
+                } else {
+                    rol="admin";
+                }
 
+                if (user.equals("") || pass.equals("")) {
+
+                    Toast.makeText(RegisterActivity.this, "Todos los campos son obligatorios", Toast.LENGTH_SHORT).show();
+                } else {
+
+                    if (rol.equals("usuario")) {
+
+                        pasarPantalla=new Intent(RegisterActivity.this, MisCitasUserActivity.class);
+                        finish();
+                        startActivity(pasarPantalla);
+
+                    } else if (rol.equals("admin")) {
+
+                        pasarPantalla=new Intent(RegisterActivity.this, ListActivityAdmin.class);
+                        finish();
+                        startActivity(pasarPantalla);
+
+                    } else {
+
+                        Toast.makeText(RegisterActivity.this, "Debes seleccionar un rol", Toast.LENGTH_SHORT).show();
+                    }
+                }
             }
         });
 

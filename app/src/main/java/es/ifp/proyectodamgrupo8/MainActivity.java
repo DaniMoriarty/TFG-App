@@ -21,6 +21,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        getSupportActionBar().hide();
 
         image1= (ImageView) findViewById(R.id.image1_main);
         label1= (TextView) findViewById(R.id.label1_main);
