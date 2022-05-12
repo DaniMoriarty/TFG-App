@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="es.ifp.proyectodamgrupo8">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -10,7 +12,16 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ProyectoDAMGrupo8">
         <activity
-            android:name=".ListActivity"
+            android:name=".MisCitasUserActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ListActivityUser2"
+            android:exported="false" />
+        <activity
+            android:name=".ListActivityAdmin"
+            android:exported="false" />
+        <activity
+            android:name=".ListActivityUser"
             android:exported="false" />
         <activity
             android:name=".RegisterActivity"
